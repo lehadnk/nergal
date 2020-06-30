@@ -1,0 +1,9 @@
+{
+  "package": "./package.json",
+  "require" : [
+    "ts-node/register"
+  ],
+  "file": [
+    "test/startup.ts"
+  ]
+}
