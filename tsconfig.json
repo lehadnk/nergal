@@ -1,0 +1,29 @@
+{
+  "compilerOptions" : {
+    "alwaysStrict": true,
+    "module" : "commonjs",
+    "moduleResolution": "node",
+    "target" : "es2017",
+    "sourceMap" : true,
+    "outDir": "./build"
+  },
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "files": [
+    "run.ts",
+    "console.ts"
+  ],
+  "types": [
+    "mocha",
+    "node",
+    "chai",
+    "sinon",
+    "sinon-chai",
+    "discord.js",
+    "dotenv"
+  ],
+  "exclude" : [
+    "node_modules"
+  ]
+}

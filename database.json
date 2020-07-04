@@ -1,0 +1,13 @@
+{
+  "defaultEnv": {"ENV":  "APP_ENV"},
+
+  "dev": {
+    "driver": "sqlite3",
+    "filename": "./dev-db.db3"
+  },
+
+  "prod": {
+    "driver": "sqlite3",
+    "filename": "./prod-db.db3"
+  }
+}

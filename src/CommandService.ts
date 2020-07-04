@@ -17,13 +17,14 @@ export class CommandService {
         }
     }
 
-    public run(command: string, args: string[]) {
+    public async run(command: string, args: string[]) {
         let handler = this.commands.get(command);
         if (!handler) {
             console.error("No such command: " + command);
-            return;
+            process.exit(1);
         }
 
-        handler.run(args);
+        await handler.run(args);
+        process.exit(0);
     }
 }

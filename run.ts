@@ -7,7 +7,8 @@ import {DiscordController} from "./src/Controllers/DiscordController";
 
 dotenvInit();
 
-let db = new Database('./prod-db.db3');
+let databaseFile = './' + process.env.APP_ENV + '-db.db3';
+let db = new Database(databaseFile);
 let adapter = new SqliteDbAdapter(db);
 
 let adminIds = JSON.parse(process.env.ADMIN_IDS);

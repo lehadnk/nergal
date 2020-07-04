@@ -12,6 +12,7 @@ export class DiscordService {
         this.discordClient = discordClient;
         this.token = token;
         this.contestChannel = contestChannel;
+
         // It's not injectable, since DiscordService logic is highly couped with DiscordController
         this.controller = controller;
         this.messageLifeTime = process.env.MESSAGE_LIFE_SPAN != undefined ? parseInt(process.env.MESSAGE_LIFE_SPAN) : 10000;
@@ -20,6 +21,7 @@ export class DiscordService {
 
     private setupHandlers() {
         this.discordClient.on("message", msg => {
+            this.discordClient.guilds.cache.each(g => console.log(g.name));
             console.log("Handling message in the channel " + msg.channel.name + " on server " + msg.guild.name);
         });
     }
