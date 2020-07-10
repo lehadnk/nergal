@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import {CommandService} from "./src/CommandService";
 import {config as dotenvInit} from "dotenv";
 import {Database} from "sqlite3";

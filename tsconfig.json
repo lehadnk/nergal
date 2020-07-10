@@ -5,7 +5,10 @@
     "moduleResolution": "node",
     "target" : "es2017",
     "sourceMap" : true,
-    "outDir": "./build"
+    "outDir": "./build",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["reflect-metadata"]
   },
   "typeRoots": [
     "node_modules/@types"
@@ -21,7 +24,8 @@
     "sinon",
     "sinon-chai",
     "discord.js",
-    "dotenv"
+    "dotenv",
+    "reflect-metadata"
   ],
   "exclude" : [
     "node_modules"

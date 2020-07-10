@@ -1,13 +1,16 @@
 import {Database} from "sqlite3";
 import {IDbAdapter} from "./IDbAdapter";
 import {DatabaseError, DatabaseErrorCode} from "./Exceptions/DatabaseError";
+import { injectable } from 'inversify';
 
+@injectable()
 export class SqliteDbAdapter implements IDbAdapter {
 
     private db: Database;
 
     constructor(dbConnection: Database) {
         this.db = dbConnection;
+
     }
 
     async value(sql: string, placeholders?: object): Promise<string> {
