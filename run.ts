@@ -1,9 +1,9 @@
+import "reflect-metadata";
 import {config as dotenvInit} from 'dotenv';
 import {DiscordService} from "./src/DiscordService";
 import {Database} from "sqlite3";
 import {SqliteDbAdapter} from "./src/SqliteDbAdapter";
 import {Client} from "discord.js";
-import {DiscordController} from "./src/Controllers/DiscordController";
 
 dotenvInit();
 
@@ -11,15 +11,15 @@ let databaseFile = './' + process.env.APP_ENV + '-db.db3';
 let db = new Database(databaseFile);
 let adapter = new SqliteDbAdapter(db);
 
+let admins = new Map<string, null>();
 let adminIds = JSON.parse(process.env.ADMIN_IDS);
+adminIds.forEach(e => admins.set(e, null));
 
-let discordController = new DiscordController(adminIds);
 let discordClient = new Client();
 let service = new DiscordService(
-    discordController,
     discordClient,
     process.env.DISCORD_BOT_TOKEN,
-    process.env.CONTEST_CHANNEL_NAME
+    admins
 );
 
 service.start();
