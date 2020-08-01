@@ -1,8 +1,8 @@
-import {DiscordMessage} from "../DTO/DiscordMessage";
-import {DiscordControllerResponse} from "../DTO/DiscordControllerResponse";
-import {BaseController} from "../Controllers/BaseController";
-import {AdminController} from "../Controllers/AdminController";
-import IRouter from "./IRouter";
+import {DiscordMessage} from "../../src/DTO/DiscordMessage";
+import {DiscordControllerResponse} from "../../src/DTO/DiscordControllerResponse";
+import {BaseController} from "./Controllers/BaseController";
+import {AdminController} from "./Controllers/AdminController";
+import IRouter from "../../src/Routing/IRouter";
 
 export default class Router implements IRouter {
     public async route(msg: DiscordMessage): Promise<DiscordControllerResponse>

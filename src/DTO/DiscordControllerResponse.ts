@@ -1,5 +1,3 @@
-import {DiscordMessage} from "./DiscordMessage";
-
 export class DiscordControllerResponse {
     public responseMessage: string;
     public removeOriginalMessage: boolean;

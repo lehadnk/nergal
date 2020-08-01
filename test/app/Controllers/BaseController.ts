@@ -1,5 +1,5 @@
-import {DiscordMessage} from "../DTO/DiscordMessage";
-import {DiscordControllerResponse} from "../DTO/DiscordControllerResponse";
+import {DiscordMessage} from "../../../src/DTO/DiscordMessage";
+import {DiscordControllerResponse} from "../../../src/DTO/DiscordControllerResponse";
 
 export class BaseController {
     constructor() {

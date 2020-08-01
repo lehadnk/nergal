@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/ts-node test/startup.ts && node_modules/.bin/mocha \"./test/*.test.ts\"",
+    "test": "ts-node test/startup.ts && node_modules/.bin/mocha \"./test/*.test.ts\"",
     "compile": "node_modules/typescript/bin/tsc --listEmittedFiles",
     "migrate": "node_modules/db-migrate/bin/db-migrate",
     "start": "node_modules/.bin/ts-node run.ts",
@@ -21,7 +21,6 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "inversify": "^5.0.1",
-    "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.2.0",
     "typescript": "^3.9.7"
   },

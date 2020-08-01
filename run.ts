@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import ServiceContainer from "./src/ServiceContainer";
+import TestServiceContainer from "./test/app/TestServiceContainer";
 
-ServiceContainer.init();
-ServiceContainer.start();
+TestServiceContainer.init();
+TestServiceContainer.start();
