@@ -1,6 +1,6 @@
 {
-  "name": "discord-quest-bot",
-  "version": "1.0.0",
+  "name": "nisaba",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {

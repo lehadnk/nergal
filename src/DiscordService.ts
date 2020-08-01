@@ -1,7 +1,6 @@
 import {Client} from 'discord.js';
 import {getMsgAuthorName} from "./Helpers/ChatMessageHelpers";
 import {DiscordMessage} from "./DTO/DiscordMessage";
-import Router from "./Routing/Router";
 import IRouter from "./Routing/IRouter";
 
 export class DiscordService {
