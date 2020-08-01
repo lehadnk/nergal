@@ -4,6 +4,7 @@ import {Client} from 'discord.js';
 import {SqliteDbAdapter} from "./SqliteDbAdapter";
 import {DiscordService} from "./DiscordService";
 import {config as dotenvInit} from "dotenv";
+import Router from "./Routing/Router";
 
 export default class ServiceContainer {
     static db: IDbAdapter;
@@ -26,6 +27,7 @@ export default class ServiceContainer {
 
         this.discordService = new DiscordService(
             ServiceContainer.discordClient,
+            new Router(),
             process.env.DISCORD_BOT_TOKEN,
             admins
         );

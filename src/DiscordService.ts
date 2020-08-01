@@ -1,17 +1,19 @@
 import {Client} from 'discord.js';
-import {BaseController} from "./Controllers/BaseController";
 import {getMsgAuthorName} from "./Helpers/ChatMessageHelpers";
 import {DiscordMessage} from "./DTO/DiscordMessage";
 import Router from "./Routing/Router";
+import IRouter from "./Routing/IRouter";
 
 export class DiscordService {
     private readonly discordClient;
     private readonly token: string;
     private readonly messageLifeTime: number;
     private readonly adminIds: Map<string, null>;
+    private readonly router: IRouter;
 
-    constructor(discordClient: Client, token: string, adminIds: Map<string, null>) {
+    constructor(discordClient: Client, router: IRouter, token: string, adminIds: Map<string, null>) {
         this.discordClient = discordClient;
+        this.router = router;
         this.token = token;
         this.adminIds = adminIds;
 
@@ -22,6 +24,10 @@ export class DiscordService {
 
     private setupHandlers() {
         this.discordClient.on("message", msg => {
+            if (msg.author.bot) {
+                return;
+            }
+
             let imageUrls: string[] = [];
             msg.attachments.forEach(attachment => {
                 if (attachment.url.match(/\.(jpeg|jpg|gif|png)$/) != null) {
@@ -40,8 +46,26 @@ export class DiscordService {
                 msg.channel.type === 'dm'
             );
 
-            let router = new Router();
-            let controllerResponse = router.route(parsedMessage);
+            this.router
+                .route(parsedMessage)
+                .then(result => {
+                    if (result.removeOriginalMessage) {
+                        msg.delete(1).catch(reason => {
+                            console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
+                        });
+                    }
+                    if (result.responseMessage) {
+                        msg.channel
+                            .send(result.responseMessage)
+                            .then(message => {
+                                if (message.deletable) {
+                                    message.delete({timeout: this.messageLifeTime});
+                                } else {
+                                    console.error("Unable to delete message in server" + msg.guild.name + ", bot have no rights to do that");
+                                }
+                            });
+                    }
+                });
         });
     }
 

@@ -10,7 +10,7 @@ export class BaseController {
 
         // Spam message - we're just clearing it
         return new Promise<DiscordControllerResponse>((resolve) => {
-            resolve(new DiscordControllerResponse(null, null, true));
+            resolve(new DiscordControllerResponse("Pong!", false));
         });
     }
 }
