@@ -19,6 +19,11 @@ Add following commands into the package.json scripts structure:
 }
 ```
 
+Then init the project:
+```shell script
+node node_modules/nergal/init
+```
+
 # Migrations
 To create new migration run
 ```

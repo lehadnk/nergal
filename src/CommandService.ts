@@ -1,21 +1,12 @@
-import * as commands from "./Commands";
-import {Client} from "discord.js";
-import {ICommand} from "./Commands";
-import {IDbAdapter} from "./IDbAdapter";
-import AbstractServiceContainer from "./AbstractServiceContainer";
+import ICommandsLoader from "./Commands/ICommandsLoader";
+import ICommand from "./Commands/ICommand";
 
 export class CommandService {
 
     private commands: Map<string, ICommand>;
 
-    constructor() {
-        this.commands = new Map<string, ICommand>();
-        for (let commandsKey in commands) {
-            let object = new commands[commandsKey];
-            object.discordClient = AbstractServiceContainer.discordClient;
-            object.db = AbstractServiceContainer.db;
-            this.commands.set(object.name, object);
-        }
+    constructor(loader: ICommandsLoader) {
+        this.commands = loader.load();
     }
 
     public async run() {
@@ -34,15 +25,10 @@ export class CommandService {
             process.exit(1);
         }
 
-        AbstractServiceContainer.discordClient.on('ready', async () => {
-            console.log('test');
-            await handler.run(args);
-            process.exit(0);
-        });
-
-        AbstractServiceContainer.discordClient.login(process.env.DISCORD_BOT_TOKEN)
-            .catch(r => {
-                console.error("Unable to connect to discord: " + r);
+        handler.run(args)
+            .then(() => process.exit(0))
+            .catch(error => {
+                console.error(error);
                 process.exit(1);
             });
     }

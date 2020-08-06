@@ -69,11 +69,24 @@ export class DiscordService {
         });
     }
 
-    start() {
-        this.discordClient
-            .login(this.token)
-            .then(() => {
+    async start(): Promise<boolean>
+    {
+        return new Promise<boolean>((resolve, reject) => {
+            this.discordClient.on("ready", () => {
                 console.info('Bot is up!');
-            })
+                resolve(true);
+            });
+
+            this.discordClient
+                .login(this.token)
+                .then(() => {
+
+                })
+                .catch(reason => {
+                    console.error('Error while bringing the bot up: ' + reason);
+                    reject(reason);
+                })
+        });
+
     }
 }

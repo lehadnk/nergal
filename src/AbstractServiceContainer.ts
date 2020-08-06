@@ -35,8 +35,11 @@ export default abstract class AbstractServiceContainer {
         );
     }
 
-    public static start()
+    public static async start()
     {
-        this.discordService.start();
+        let result = await this.discordService.start();
+        if (result === false) {
+            throw "Unable to start the application";
+        }
     }
 }
