@@ -8,6 +8,17 @@ npm run test
 npm run compile
 ```
 
+# Project setup
+Add following commands into the package.json scripts structure:
+```json
+{
+    "scripts": {
+      "nergal": "node_modules/.bin/ts-node node_modules/nergal/console.ts",
+      "migrate": "node_modules/db-migrate/bin/db-migrate"
+    }
+}
+```
+
 # Migrations
 To create new migration run
 ```

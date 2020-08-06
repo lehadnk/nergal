@@ -1,4 +1,4 @@
-import ServiceContainer from "../../src/ServiceContainer";
+import ServiceContainer from "../../src/AbstractServiceContainer";
 import IRouter from "../../src/Routing/IRouter";
 import Router from "./Router";
 
