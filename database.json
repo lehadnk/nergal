@@ -1,6 +1,11 @@
 {
   "defaultEnv": {"ENV":  "APP_ENV"},
 
+  "test": {
+    "driver": "sqlite3",
+    "filename": "./test-db.db3"
+  },
+
   "dev": {
     "driver": "sqlite3",
     "filename": "./dev-db.db3"

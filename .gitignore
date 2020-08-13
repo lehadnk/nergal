@@ -1,6 +1,7 @@
 node_modules
 .idea
 *.iml
+test-db.db3
 dev-db.db3
 prod-db.db3
 build/*

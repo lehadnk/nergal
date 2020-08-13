@@ -4,7 +4,7 @@ import {BaseController} from "./Controllers/BaseController";
 import {AdminController} from "./Controllers/AdminController";
 import IRouter from "../../src/Routing/IRouter";
 
-export default class Router implements IRouter {
+export default class TestRouter implements IRouter {
     public async route(msg: DiscordMessage): Promise<DiscordControllerResponse>
     {
         if (msg.isAdmin && msg.isPrivate) {

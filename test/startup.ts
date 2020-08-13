@@ -1,11 +1,15 @@
-import {unlinkSync, existsSync} from 'fs';
-import {exec} from 'child_process';
+import UnitTestServiceContainer from "./app/UnitTestServiceContainer";
+import {config as dotenvInit} from "dotenv";
 
-const testDbFile = 'test-db.db3';
+dotenvInit({
+    path: '.env.test'
+});
 
-if (existsSync(testDbFile)) {
-    unlinkSync(testDbFile);
-    console.log('Test db removed...');
-}
+// let DBMigrate = require('db-migrate');
+// let dbmigrate = DBMigrate.getInstance(true);
+// dbmigrate.silence(true);
+// dbmigrate.reset()
+//     .then(() => dbmigrate.up());
 
-exec("npm run migrate up");
+UnitTestServiceContainer.init();
+UnitTestServiceContainer.start();
