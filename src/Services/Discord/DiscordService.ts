@@ -1,14 +1,17 @@
-import {Client} from 'discord.js';
-import {getMsgAuthorName} from "./Helpers/ChatMessageHelpers";
-import {DiscordMessage} from "./DTO/DiscordMessage";
-import IRouter from "./Routing/IRouter";
+import {Client, GuildEmoji} from 'discord.js';
+import {getMsgAuthorName} from "../../Helpers/ChatMessageHelpers";
+import {DiscordMessage} from "../../DTO/DiscordMessage";
+import IRouter from "../../Routing/IRouter";
+import EmojiReference from "../../DTO/EmojiReference";
+import EmojiContainer from "./EmojiContainer";
 
 export class DiscordService {
     private readonly discordClient;
     private readonly token: string;
     private readonly messageLifeTime: number;
     private readonly adminIds: Map<string, null>;
-    private readonly router: IRouter;
+    private router: IRouter;
+    private emojis: EmojiContainer = new EmojiContainer();
 
     constructor(discordClient: Client, router: IRouter, token: string, adminIds: Map<string, null>) {
         this.discordClient = discordClient;
@@ -19,6 +22,11 @@ export class DiscordService {
         // It's not injectable, since DiscordService logic is highly couped with BaseController
         this.messageLifeTime = process.env.MESSAGE_LIFE_SPAN != undefined ? parseInt(process.env.MESSAGE_LIFE_SPAN) : 10000;
         this.setupHandlers();
+    }
+
+    public setRouter(router: IRouter)
+    {
+        this.router = router;
     }
 
     private setupHandlers() {
@@ -58,6 +66,16 @@ export class DiscordService {
                         msg.channel
                             .send(result.responseMessage)
                             .then(message => {
+                                result.responseReactions.forEach((er) => {
+                                    let emoji = this.emojis.get(er);
+                                    message.react(emoji).catch(error => console.error(error))
+                                });
+
+                                if (result.reactionCollector) {
+                                    let collector = message.createReactionCollector((reaction, user) => user.id !== message.author.id, { time: result.reactionCollector.time });
+                                    collector.on("collect", ((reaction, user) => result.reactionCollector.lambda(reaction, user)));
+                                }
+
                                 if (message.deletable) {
                                     message.delete({timeout: this.messageLifeTime});
                                 } else {
@@ -71,9 +89,14 @@ export class DiscordService {
 
     async start(): Promise<boolean>
     {
+        if (this.router == null) {
+            throw "router cannot be null at app start";
+        }
+
         return new Promise<boolean>((resolve, reject) => {
-            this.discordClient.on("ready", () => {
-                console.info('Bot is up!');
+            this.discordClient.on("ready", async () => {
+                // console.info('Bot is up!');
+                await this.loadEmojiList();
                 resolve(true);
             });
 
@@ -87,6 +110,14 @@ export class DiscordService {
                     reject(reason);
                 })
         });
+    }
 
+    private async loadEmojiList()
+    {
+        this.discordClient.guilds.cache.each(guild => {
+            guild.emojis.cache.each(emoji => {
+                this.emojis.store(new EmojiReference(guild.id, emoji.name), emoji);
+            });
+        });
     }
 }

@@ -1,8 +1,8 @@
-import {IDbAdapter} from "./IDbAdapter";
+import {IDbAdapter} from "./Services/Db/IDbAdapter";
 import {Database} from "sqlite3";
 import {Client} from 'discord.js';
-import {SqliteDbAdapter} from "./SqliteDbAdapter";
-import {DiscordService} from "./DiscordService";
+import {SqliteDbAdapter} from "./Services/Db/SqliteDbAdapter";
+import {DiscordService} from "./Services/Discord/DiscordService";
 import {config as dotenvInit} from "dotenv";
 import IRouter from "./Routing/IRouter";
 
@@ -40,6 +40,13 @@ export default abstract class AbstractServiceContainer {
         let result = await this.discordService.start();
         if (result === false) {
             throw "Unable to start the application";
+        } else {
+            console.log('The application started!');
         }
+    }
+
+    protected static updateRouter()
+    {
+        this.discordService.setRouter(this.router);
     }
 }

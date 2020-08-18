@@ -3,7 +3,7 @@ import IRouter from "../../src/Routing/IRouter";
 import TestRouter from "./TestRouter";
 import {config as dotenvInit} from "dotenv";
 import {Database} from "sqlite3";
-import {SqliteDbAdapter} from "../../src/SqliteDbAdapter";
+import {SqliteDbAdapter} from "../../src/Services/Db/SqliteDbAdapter";
 
 export default class UnitTestServiceContainer extends ServiceContainer {
     protected static router: IRouter = new TestRouter();

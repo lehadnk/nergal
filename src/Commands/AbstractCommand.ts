@@ -1,5 +1,5 @@
 import {Client} from 'discord.js';
-import {IDbAdapter} from "../IDbAdapter";
+import {IDbAdapter} from "../Services/Db/IDbAdapter";
 
 export default class AbstractCommand {
     public discordClient: Client;

@@ -1,5 +1,5 @@
-import ICommandsLoader from "./Commands/ICommandsLoader";
-import ICommand from "./Commands/ICommand";
+import ICommandsLoader from "../../Commands/ICommandsLoader";
+import ICommand from "../../Commands/ICommand";
 
 export class CommandService {
 

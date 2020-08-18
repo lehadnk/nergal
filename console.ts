@@ -1,4 +1,4 @@
-import {CommandService} from "./src/CommandService";
+import {CommandService} from "./src/Services/Command/CommandService";
 import AbstractServiceContainer from "./src/AbstractServiceContainer";
 import TestCommandsLoader from "./test/app/Commands/TestCommandsLoader";
 
