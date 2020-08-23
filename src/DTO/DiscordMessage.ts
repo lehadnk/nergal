@@ -1,5 +1,6 @@
 export class DiscordMessage {
     public readonly authorId: string;
+    public readonly authorTag: number;
     public readonly serverId: string;
     public readonly channelId: string;
     public readonly authorName: string;
@@ -8,8 +9,19 @@ export class DiscordMessage {
     public readonly isAdmin: boolean;
     public readonly isPrivate: boolean;
 
-    constructor(authorId: string, authorName: string, serverId: string, channelId: string, message: string, embedImageUrl: string[], isAdmin: boolean, isPrivate: boolean) {
+    constructor(
+        authorId: string,
+        authorTag: number,
+        authorName: string,
+        serverId: string,
+        channelId: string,
+        message: string,
+        embedImageUrl: string[],
+        isAdmin: boolean,
+        isPrivate: boolean
+    ) {
         this.authorId = authorId;
+        this.authorTag = authorTag;
         this.authorName = authorName;
         this.serverId = serverId;
         this.channelId = channelId;

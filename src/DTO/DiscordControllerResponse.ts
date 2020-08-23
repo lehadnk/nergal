@@ -2,18 +2,21 @@ import EmojiReference from "./EmojiReference";
 import ReactionCollector from "./ReactionCollector";
 
 export class DiscordControllerResponse {
-    public responseMessage: string;
-    public removeOriginalMessage: boolean;
-    public responseReactions: EmojiReference[];
-    public reactionCollector: ReactionCollector;
+    public readonly responseMessage: string;
+    public readonly removeOriginalMessage: boolean;
+    public readonly responseReactions: EmojiReference[];
+    public readonly reactionCollector: ReactionCollector;
+    public readonly messageLifeSpan: number = null;
 
     constructor(
         responseMessage?: string,
-        removeOriginalMessage: boolean = true,
+        messageLifeSpan: number = null,
+        removeOriginalMessage: boolean = false,
         responseReactions: EmojiReference[] = [],
-        reactionCollector: ReactionCollector = null
+        reactionCollector: ReactionCollector = null,
     ) {
         this.responseMessage = responseMessage;
+        this.messageLifeSpan = messageLifeSpan;
         this.removeOriginalMessage = removeOriginalMessage;
         this.responseReactions = responseReactions;
         this.reactionCollector = reactionCollector;

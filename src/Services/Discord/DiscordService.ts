@@ -1,4 +1,4 @@
-import {Client, GuildEmoji} from 'discord.js';
+import {Client} from 'discord.js';
 import {getMsgAuthorName} from "../../Helpers/ChatMessageHelpers";
 import {DiscordMessage} from "../../DTO/DiscordMessage";
 import IRouter from "../../Routing/IRouter";
@@ -8,7 +8,6 @@ import EmojiContainer from "./EmojiContainer";
 export class DiscordService {
     private readonly discordClient;
     private readonly token: string;
-    private readonly messageLifeTime: number;
     private readonly adminIds: Map<string, null>;
     private router: IRouter;
     private emojis: EmojiContainer = new EmojiContainer();
@@ -19,8 +18,6 @@ export class DiscordService {
         this.token = token;
         this.adminIds = adminIds;
 
-        // It's not injectable, since DiscordService logic is highly couped with BaseController
-        this.messageLifeTime = process.env.MESSAGE_LIFE_SPAN != undefined ? parseInt(process.env.MESSAGE_LIFE_SPAN) : 10000;
         this.setupHandlers();
     }
 
@@ -45,6 +42,7 @@ export class DiscordService {
 
             let parsedMessage = new DiscordMessage(
                 msg.author.id,
+                msg.author.discriminator,
                 getMsgAuthorName(msg),
                 msg.guild !== null ? msg.guild.id : null,
                 msg.channel.id,
@@ -57,6 +55,10 @@ export class DiscordService {
             this.router
                 .route(parsedMessage)
                 .then(result => {
+                    if (result === null) {
+                        return;
+                    }
+
                     if (result.removeOriginalMessage) {
                         msg.delete(1).catch(reason => {
                             console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
@@ -76,10 +78,11 @@ export class DiscordService {
                                     collector.on("collect", ((reaction, user) => result.reactionCollector.lambda(reaction, user)));
                                 }
 
-                                if (message.deletable) {
-                                    message.delete({timeout: this.messageLifeTime});
-                                } else {
-                                    console.error("Unable to delete message in server" + msg.guild.name + ", bot have no rights to do that");
+
+                                if (result.messageLifeSpan !== null) {
+                                    message.delete({timeout: result.messageLifeSpan}).catch(reason => {
+                                        console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
+                                    });
                                 }
                             });
                     }
@@ -95,7 +98,6 @@ export class DiscordService {
 
         return new Promise<boolean>((resolve, reject) => {
             this.discordClient.on("ready", async () => {
-                // console.info('Bot is up!');
                 await this.loadEmojiList();
                 resolve(true);
             });

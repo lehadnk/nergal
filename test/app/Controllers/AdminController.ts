@@ -7,7 +7,7 @@ export class AdminController {
 
         // Spam message - we're just clearing it
         return new Promise<DiscordControllerResponse>((resolve) => {
-            resolve(new DiscordControllerResponse("Hello!", false));
+            resolve(new DiscordControllerResponse("Hello!"));
         });
     }
 }
