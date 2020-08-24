@@ -49,7 +49,8 @@ export class DiscordService {
                 msg.content,
                 imageUrls,
                 this.adminIds.has(msg.author.id),
-                msg.channel.type === 'dm'
+                msg.channel.type === 'dm',
+                msg.author.displayAvatarURL()
             );
 
             this.router
