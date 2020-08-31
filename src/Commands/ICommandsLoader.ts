@@ -1,4 +1,4 @@
-import {ICommand} from "../../test/app/Commands";
+import ICommand from "./ICommand";
 
 export default interface ICommandsLoader
 {
