@@ -13,7 +13,7 @@ Add following commands into the package.json scripts structure:
 ```json
 {
     "scripts": {
-      "nergal": "node_modules/.bin/ts-node node_modules/nergal/console.ts",
+      "nergal": "node_modules/.bin/ts-node console.ts",
       "migrate": "node_modules/db-migrate/bin/db-migrate"
     }
 }

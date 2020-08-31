@@ -30,6 +30,7 @@ fs.copyFileSync('node_modules/nergal/template/test/Mocha.test.ts', './test/Mocha
 fs.copyFileSync('node_modules/nergal/template/test/startup.ts', './test/startup.ts');
 fs.copyFileSync('node_modules/nergal/template/src/AppServiceContainer.ts', './src/AppServiceContainer.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Router.ts', './src/Router.ts');
+fs.copyFileSync('node_modules/nergal/template/src/Controllers/DirectMessageController.ts', './src/Controllers/DirectMessageController.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Commands/index.ts', './src/Commands/index.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Commands/AppCommandsLoader.ts', './src/Commands/AppCommandsLoader.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Commands/ListGuilds.ts', './src/Commands/ListGuilds.ts');
