@@ -1,3 +1,3 @@
-export default abstract class AbstractModel {
+export abstract class AbstractModel {
     public id: number;
 }

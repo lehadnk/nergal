@@ -1,7 +1,7 @@
 import {GuildEmoji} from "discord.js";
-import EmojiReference from "../../DTO/EmojiReference";
+import {EmojiReference} from "../../DTO/EmojiReference";
 
-export default class EmojiContainer {
+export class EmojiContainer {
     private emojis: Map<string, GuildEmoji> = new Map<string, GuildEmoji>();
 
     store(reference: EmojiReference, emoji: GuildEmoji)

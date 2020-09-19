@@ -1,6 +1,6 @@
 import {Client} from "discord.js";
 
-export default interface ICommand {
+export interface ICommand {
     name: string;
     discordClient: Client;
 

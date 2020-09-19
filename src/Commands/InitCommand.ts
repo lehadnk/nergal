@@ -1,7 +1,7 @@
-import AbstractCommand from "./AbstractCommand";
-import ICommand from "./ICommand";
+import {AbstractCommand} from "./AbstractCommand";
+import {ICommand} from "./ICommand";
 
-export default class InitCommand extends AbstractCommand implements ICommand {
+export class InitCommand extends AbstractCommand implements ICommand {
     name: string = 'init-project';
 
     async run(args: string[]) {

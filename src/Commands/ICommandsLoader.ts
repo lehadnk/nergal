@@ -1,6 +1,6 @@
-import ICommand from "./ICommand";
+import {ICommand} from "./ICommand";
 
-export default interface ICommandsLoader
+export interface ICommandsLoader
 {
     load(): Map<string, ICommand>
 }

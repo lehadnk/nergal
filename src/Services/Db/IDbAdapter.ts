@@ -1,4 +1,4 @@
-export default interface IDbAdapter {
+export interface IDbAdapter {
     value(sql: string, placeholders?: object): Promise<string>;
 
     one(sql: string, placeholders?: object): Promise<any>;

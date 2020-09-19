@@ -1,12 +1,12 @@
-import IDbAdapter from "./Services/Db/IDbAdapter";
+import {IDbAdapter} from "./Services/Db/IDbAdapter";
 import {Database} from "sqlite3";
 import {Client} from 'discord.js';
 import {SqliteDbAdapter} from "./Services/Db/SqliteDbAdapter";
 import {DiscordService} from "./Services/Discord/DiscordService";
 import {config as dotenvInit} from "dotenv";
-import IRouter from "./Routing/IRouter";
+import {IRouter} from "./Routing/IRouter";
 
-export default abstract class AbstractServiceContainer {
+export abstract class AbstractServiceContainer {
     static db: IDbAdapter;
     static discordClient: Client;
     static discordService: DiscordService;
@@ -45,7 +45,7 @@ export default abstract class AbstractServiceContainer {
         }
     }
 
-    protected static updateRouter()
+    public static updateRouter()
     {
         this.discordService.setRouter(this.router);
     }

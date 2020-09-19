@@ -1,7 +1,7 @@
-import {default as ICommand} from "../../../src/Commands/ICommand";
-import AbstractCommand from "../../../src/Commands/AbstractCommand";
+import {ICommand} from "../../../src/Commands/ICommand";
+import {AbstractCommand} from "../../../src/Commands/AbstractCommand";
 import {UsersDAO} from "../../../src/DAO/UsersDAO";
-import User from "../../../src/Models/User";
+import {User} from "../../../src/Models/User";
 
 export default class ListUsers extends AbstractCommand implements ICommand {
     name: string = 'list-users';

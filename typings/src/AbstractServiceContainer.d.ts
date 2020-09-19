@@ -1,7 +1,7 @@
-import IDbAdapter from "./Services/Db/IDbAdapter";
+import { IDbAdapter } from "./Services/Db/IDbAdapter";
 import { Client } from 'discord.js';
 import { DiscordService } from "./Services/Discord/DiscordService";
-import IRouter from "./Routing/IRouter";
+import { IRouter } from "./Routing/IRouter";
 export default abstract class AbstractServiceContainer {
     static db: IDbAdapter;
     static discordClient: Client;
@@ -9,5 +9,5 @@ export default abstract class AbstractServiceContainer {
     protected static router: IRouter;
     static init(): void;
     static start(): Promise<void>;
-    protected static updateRouter(): void;
+    static updateRouter(): void;
 }

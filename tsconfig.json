@@ -8,14 +8,14 @@
     "outDir": "./build",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declarationDir": "./typings"
+    "declarationDir": "./typings",
+    "declaration": true
   },
   "typeRoots": [
     "node_modules/@types"
   ],
   "files": [
-    "run.ts",
-    "console.ts"
+    "src/index"
   ],
   "types": [
     "mocha",

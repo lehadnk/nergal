@@ -1,5 +1,5 @@
-import AbstractDAO from "./AbstractDAO";
-import User from "../Models/User";
+import {AbstractDAO} from "./AbstractDAO";
+import {User} from "../Models/User";
 
 export class UsersDAO extends AbstractDAO<User> {
     table: string = 'users';

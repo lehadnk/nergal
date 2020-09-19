@@ -1,4 +1,4 @@
-export default class EmojiReference {
+export class EmojiReference {
     guild_id: string;
     name: string;
 

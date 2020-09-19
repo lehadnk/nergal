@@ -1,5 +1,5 @@
-import EmojiReference from "./EmojiReference";
-import ReactionCollector from "./ReactionCollector";
+import {EmojiReference} from "./EmojiReference";
+import {ReactionCollector} from "./ReactionCollector";
 
 export class DiscordControllerResponse {
     public readonly responseMessage: string;

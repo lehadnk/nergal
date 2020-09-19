@@ -1,8 +1,4 @@
-export enum DatabaseErrorCode {
-    ConstraintViolation = 0,
-    NoResult = 1,
-    Other = 2,
-}
+import {DatabaseErrorCode} from "./DatabaseErrorCode";
 
 export class DatabaseError {
     private code: DatabaseErrorCode;

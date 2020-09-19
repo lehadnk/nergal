@@ -1,7 +1,7 @@
-import ServiceContainer from 'nergal/src/AbstractServiceContainer';
+import {AbstractServiceContainer} from 'nergal';
 import Router from "./Router";
 
-export default class AppServiceContainer extends ServiceContainer {
+export default class AppServiceContainer extends AbstractServiceContainer {
     protected static router = new Router();
 
     public static init()

@@ -1,9 +1,9 @@
 import {Client} from 'discord.js';
 import {getMsgAuthorName} from "../../Helpers/ChatMessageHelpers";
 import {DiscordMessage} from "../../DTO/DiscordMessage";
-import IRouter from "../../Routing/IRouter";
-import EmojiReference from "../../DTO/EmojiReference";
-import EmojiContainer from "./EmojiContainer";
+import {IRouter} from "../../Routing/IRouter";
+import {EmojiReference} from "../../DTO/EmojiReference";
+import {EmojiContainer} from "./EmojiContainer";
 
 export class DiscordService {
     private readonly discordClient;

@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import {UsersDAO} from "../src/DAO/UsersDAO";
-import User from "../src/Models/User";
+import {User} from "../src/Models/User";
 import UnitTestServiceContainer from "./app/UnitTestServiceContainer";
 
 describe('Tests DAO', () => {
