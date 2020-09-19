@@ -1,5 +1,5 @@
 import {Database} from "sqlite3";
-import {IDbAdapter} from "./IDbAdapter";
+import IDbAdapter from "./IDbAdapter";
 import {DatabaseError, DatabaseErrorCode} from "../../Exceptions/DatabaseError";
 
 export class SqliteDbAdapter implements IDbAdapter {

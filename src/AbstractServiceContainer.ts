@@ -1,4 +1,4 @@
-import {IDbAdapter} from "./Services/Db/IDbAdapter";
+import IDbAdapter from "./Services/Db/IDbAdapter";
 import {Database} from "sqlite3";
 import {Client} from 'discord.js';
 import {SqliteDbAdapter} from "./Services/Db/SqliteDbAdapter";
