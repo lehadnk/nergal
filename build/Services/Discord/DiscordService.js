@@ -28,7 +28,7 @@ class DiscordService {
                     imageUrls.push(attachment.url);
                 }
             });
-            let parsedMessage = new DiscordMessage_1.DiscordMessage(msg.author.id, msg.author.discriminator, ChatMessageHelpers_1.getMsgAuthorName(msg), msg.guild !== null ? msg.guild.id : null, msg.channel.id, msg.content, imageUrls, this.adminIds.has(msg.author.id), msg.channel.type === 'dm', msg.author.displayAvatarURL());
+            let parsedMessage = new DiscordMessage_1.DiscordMessage(msg.author.id, msg.author.discriminator, ChatMessageHelpers_1.getMsgAuthorName(msg), msg.guild !== null ? msg.guild.id : null, msg.guild !== null ? msg.guild.name : 'dm', msg.channel.id, msg.channel.name, msg.content, imageUrls, this.adminIds.has(msg.author.id), msg.channel.type === 'dm', msg.author.displayAvatarURL());
             this.router
                 .route(parsedMessage)
                 .then(result => {
