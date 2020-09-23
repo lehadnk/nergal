@@ -4,6 +4,5 @@ node_modules
 test-db.db3
 dev-db.db3
 prod-db.db3
-build/*
 .env
 .env.test

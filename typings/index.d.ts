@@ -19,4 +19,3 @@ export { SqliteDbAdapter } from './Services/Db/SqliteDbAdapter';
 export { DiscordService } from './Services/Discord/DiscordService';
 export { EmojiContainer } from './Services/Discord/EmojiContainer';
 export { AbstractServiceContainer } from './AbstractServiceContainer';
-

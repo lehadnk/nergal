@@ -1,0 +1,1 @@
+{"version":3,"file":"ChatMessageHelpers.js","sourceRoot":"","sources":["../../src/Helpers/ChatMessageHelpers.ts"],"names":[],"mappings":";;;AAAA,SAAgB,gBAAgB,CAAC,GAAG;IAChC,IAAI,GAAG,CAAC,MAAM,KAAK,WAAW,IAAI,GAAG,CAAC,MAAM,KAAK,IAAI,EAAE;QACnD,OAAO,GAAG,CAAC,MAAM,CAAC,QAAQ,CAAC;KAC9B;IAED,OAAO,GAAG,CAAC,MAAM,CAAC,WAAW,CAAC;AAClC,CAAC;AAND,4CAMC"}
