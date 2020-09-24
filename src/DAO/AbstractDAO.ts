@@ -23,8 +23,7 @@ export abstract class AbstractDAO<T extends AbstractModel> {
     {
         let data = await this.db.all("SELECT * FROM " + this.table);
         return data.map((data) => {
-            let object = this.factory();
-            return this.populate(object, data);
+            return this.populate(data);
         });
     }
 
@@ -35,8 +34,8 @@ export abstract class AbstractDAO<T extends AbstractModel> {
             return null;
         }
 
-        let object = this.factory();
-        return this.populate(object, data);
+
+        return this.populate(data);
     }
 
     public async getAllByField(field: string, value: string): Promise<T[]>
@@ -44,8 +43,7 @@ export abstract class AbstractDAO<T extends AbstractModel> {
         let data = await this.db.all("SELECT * FROM " + this.table + " WHERE " + field + " = ?1", {1: value});
 
         return data.map((data) => {
-            let object = this.factory();
-            return this.populate(object, data);
+            return this.populate(data);
         });
     }
 
@@ -93,11 +91,14 @@ export abstract class AbstractDAO<T extends AbstractModel> {
         await this.db.run("UPDATE " + this.table + " SET " + valuesStr + " WHERE id = " + id, Array.from(columnValues.values()));
     }
 
-    private populate(object: T, dbResult: [])
+    protected populate(dbResult: []): T
     {
+        let object = this.factory();
+
         this.fields.forEach(function(field) {
             object[field] = dbResult[field];
         });
+
         return object;
     }
 }
