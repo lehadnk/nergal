@@ -13,5 +13,5 @@ export declare abstract class AbstractDAO<T extends AbstractModel> {
     save(object: T): Promise<boolean>;
     private create;
     private update;
-    private populate;
+    protected populate(dbResult: []): T;
 }

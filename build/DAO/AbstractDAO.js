@@ -12,8 +12,7 @@ class AbstractDAO {
     async getAll() {
         let data = await this.db.all("SELECT * FROM " + this.table);
         return data.map((data) => {
-            let object = this.factory();
-            return this.populate(object, data);
+            return this.populate(data);
         });
     }
     async getOneByField(field, value) {
@@ -21,14 +20,12 @@ class AbstractDAO {
         if (data === undefined) {
             return null;
         }
-        let object = this.factory();
-        return this.populate(object, data);
+        return this.populate(data);
     }
     async getAllByField(field, value) {
         let data = await this.db.all("SELECT * FROM " + this.table + " WHERE " + field + " = ?1", { 1: value });
         return data.map((data) => {
-            let object = this.factory();
-            return this.populate(object, data);
+            return this.populate(data);
         });
     }
     async save(object) {
@@ -66,7 +63,8 @@ class AbstractDAO {
         let valuesStr = values.join(', ');
         await this.db.run("UPDATE " + this.table + " SET " + valuesStr + " WHERE id = " + id, Array.from(columnValues.values()));
     }
-    populate(object, dbResult) {
+    populate(dbResult) {
+        let object = this.factory();
         this.fields.forEach(function (field) {
             object[field] = dbResult[field];
         });
