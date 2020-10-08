@@ -11,13 +11,13 @@ class CommandService {
             process.exit(0);
         }
         let command = process.argv[2];
-        let args = process.argv.splice(0, 3);
+        let args = process.argv.splice(3);
         let handler = this.commands.get(command);
         if (!handler) {
             console.error("No such command: " + command);
             process.exit(1);
         }
-        handler.run(args)
+        await handler.run(args)
             .then(() => process.exit(0))
             .catch(error => {
             console.error(error);

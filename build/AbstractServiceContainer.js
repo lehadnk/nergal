@@ -6,6 +6,7 @@ const discord_js_1 = require("discord.js");
 const SqliteDbAdapter_1 = require("./Services/Db/SqliteDbAdapter");
 const DiscordService_1 = require("./Services/Discord/DiscordService");
 const dotenv_1 = require("dotenv");
+const MessagingService_1 = require("./Services/Discord/MessagingService");
 class AbstractServiceContainer {
     static init() {
         console.log('Initialization...');
@@ -18,6 +19,7 @@ class AbstractServiceContainer {
         let adminIds = JSON.parse(process.env.ADMIN_IDS);
         adminIds.forEach(e => admins.set(e, null));
         this.discordService = new DiscordService_1.DiscordService(this.discordClient, this.router, process.env.DISCORD_BOT_TOKEN, admins);
+        this.messagingService = new MessagingService_1.default(this.discordClient);
     }
     static async start() {
         let result = await this.discordService.start();

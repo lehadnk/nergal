@@ -6,5 +6,6 @@ export declare class DiscordControllerResponse {
     readonly responseReactions: EmojiReference[];
     readonly reactionCollector: ReactionCollector;
     readonly messageLifeSpan: number;
-    constructor(responseMessage?: string, messageLifeSpan?: number, removeOriginalMessage?: boolean, responseReactions?: EmojiReference[], reactionCollector?: ReactionCollector);
+    readonly messageDelay: number;
+    constructor(responseMessage?: string, messageLifeSpan?: number, removeOriginalMessage?: boolean, responseReactions?: EmojiReference[], reactionCollector?: ReactionCollector, messageDelay?: number);
 }

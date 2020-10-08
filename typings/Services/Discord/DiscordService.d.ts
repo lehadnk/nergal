@@ -10,5 +10,6 @@ export declare class DiscordService {
     setRouter(router: IRouter): void;
     private setupHandlers;
     start(): Promise<boolean>;
+    private sendResponse;
     private loadEmojiList;
 }
