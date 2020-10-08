@@ -1,9 +1,9 @@
-import {CommandService} from "./src/Services/Command/CommandService";
-import AbstractServiceContainer from "./src/AbstractServiceContainer";
+import {CommandService} from "./src";
+import TestServiceContainer from "./test/app/TestServiceContainer";
 import TestCommandsLoader from "./test/app/Commands/TestCommandsLoader";
 
-AbstractServiceContainer.init();
-AbstractServiceContainer.start().then(() => {
+TestServiceContainer.init();
+TestServiceContainer.start().then(() => {
     let commandService = new CommandService(new TestCommandsLoader());
     commandService.run();
 });

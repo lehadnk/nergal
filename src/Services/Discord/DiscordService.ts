@@ -4,6 +4,7 @@ import {DiscordMessage} from "../../DTO/DiscordMessage";
 import {IRouter} from "../../Routing/IRouter";
 import {EmojiReference} from "../../DTO/EmojiReference";
 import {EmojiContainer} from "./EmojiContainer";
+import {DiscordControllerResponse} from "../..";
 
 export class DiscordService {
     private readonly discordClient;
@@ -67,27 +68,9 @@ export class DiscordService {
                             console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
                         });
                     }
+
                     if (result.responseMessage) {
-                        msg.channel
-                            .send(result.responseMessage)
-                            .then(message => {
-                                result.responseReactions.forEach((er) => {
-                                    let emoji = this.emojis.get(er);
-                                    message.react(emoji).catch(error => console.error(error))
-                                });
-
-                                if (result.reactionCollector) {
-                                    let collector = message.createReactionCollector((reaction, user) => user.id !== message.author.id, { time: result.reactionCollector.time });
-                                    collector.on("collect", ((reaction, user) => result.reactionCollector.lambda(reaction, user)));
-                                }
-
-
-                                if (result.messageLifeSpan !== null) {
-                                    message.delete({timeout: result.messageLifeSpan}).catch(reason => {
-                                        console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
-                                    });
-                                }
-                            });
+                        result.messageDelay ? setTimeout(() => this.sendResponse(msg, result), result.messageDelay) : this.sendResponse(msg, result);
                     }
                 });
         });
@@ -115,6 +98,30 @@ export class DiscordService {
                     reject(reason);
                 })
         });
+    }
+
+    private sendResponse(msg: any, result: DiscordControllerResponse)
+    {
+        msg.channel
+            .send(result.responseMessage)
+            .then(message => {
+                result.responseReactions.forEach((er) => {
+                    let emoji = this.emojis.get(er);
+                    message.react(emoji).catch(error => console.error(error))
+                });
+
+                if (result.reactionCollector) {
+                    let collector = message.createReactionCollector((reaction, user) => user.id !== message.author.id, { time: result.reactionCollector.time });
+                    collector.on("collect", ((reaction, user) => result.reactionCollector.lambda(reaction, user)));
+                }
+
+
+                if (result.messageLifeSpan !== null) {
+                    message.delete({timeout: result.messageLifeSpan}).catch(reason => {
+                        console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
+                    });
+                }
+            });
     }
 
     private async loadEmojiList()

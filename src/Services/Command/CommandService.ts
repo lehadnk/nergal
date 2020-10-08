@@ -16,8 +16,7 @@ export class CommandService {
         }
 
         let command = process.argv[2];
-        let args = process.argv.splice(0, 3);
-
+        let args = process.argv.splice(3);
 
         let handler = this.commands.get(command);
         if (!handler) {
@@ -25,7 +24,7 @@ export class CommandService {
             process.exit(1);
         }
 
-        handler.run(args)
+        await handler.run(args)
             .then(() => process.exit(0))
             .catch(error => {
                 console.error(error);

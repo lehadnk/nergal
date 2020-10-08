@@ -5,11 +5,13 @@ import {SqliteDbAdapter} from "./Services/Db/SqliteDbAdapter";
 import {DiscordService} from "./Services/Discord/DiscordService";
 import {config as dotenvInit} from "dotenv";
 import {IRouter} from "./Routing/IRouter";
+import MessagingService from "./Services/Discord/MessagingService";
 
 export abstract class AbstractServiceContainer {
     static db: IDbAdapter;
     static discordClient: Client;
     static discordService: DiscordService;
+    static messagingService: MessagingService;
 
     protected static router: IRouter;
 
@@ -33,6 +35,8 @@ export abstract class AbstractServiceContainer {
             process.env.DISCORD_BOT_TOKEN,
             admins
         );
+
+        this.messagingService = new MessagingService(this.discordClient);
     }
 
     public static async start()
