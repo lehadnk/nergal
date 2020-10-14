@@ -7,8 +7,13 @@ const SqliteDbAdapter_1 = require("./Services/Db/SqliteDbAdapter");
 const DiscordService_1 = require("./Services/Discord/DiscordService");
 const dotenv_1 = require("dotenv");
 const MessagingService_1 = require("./Services/Discord/MessagingService");
+const fs_1 = require("fs");
 class AbstractServiceContainer {
     static init() {
+        if (!fs_1.existsSync('.env')) {
+            console.error("Error during startup: no .env file exists");
+            process.exit(1);
+        }
         console.log('Initialization...');
         dotenv_1.config();
         this.discordClient = new discord_js_1.Client();
