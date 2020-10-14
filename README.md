@@ -13,9 +13,12 @@ Add following commands into the package.json scripts structure:
 ```json
 {
     "scripts": {
-      "nergal": "node_modules/.bin/ts-node console.ts",
-      "migrate": "node_modules/db-migrate/bin/db-migrate"
-    }
+        "nergal": "node_modules/.bin/ts-node console.ts",
+        "migrate": "node_modules/db-migrate/bin/db-migrate",
+        "start": "node_modules/.bin/ts-node run.ts",
+        "compile": "node_modules/typescript/bin/tsc --listEmittedFiles",
+        "test": "node_modules/.bin/ts-node test/startup.ts && node_modules/.bin/mocha \"./test/*.test.ts\""
+      },
 }
 ```
 

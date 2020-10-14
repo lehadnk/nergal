@@ -23,6 +23,7 @@ if (fs.existsSync('./test')) {
 
 fs.mkdirSync('./src');
 fs.mkdirSync('./src/Commands');
+fs.mkdirSync('./src/Controllers');
 fs.mkdirSync('./test');
 fs.copyFileSync('node_modules/nergal/template/run.ts', './run.ts');
 fs.copyFileSync('node_modules/nergal/template/console.ts', './console.ts');
