@@ -1,4 +1,4 @@
-import {CommandService} from "nergal/src/Services/Command/CommandService";
+import {CommandService} from "nergal";
 import AppServiceContainer from "./src/AppServiceContainer";
 import AppCommandsLoader from "./src/Commands/AppCommandsLoader";
 

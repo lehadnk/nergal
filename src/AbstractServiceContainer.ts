@@ -6,6 +6,7 @@ import {DiscordService} from "./Services/Discord/DiscordService";
 import {config as dotenvInit} from "dotenv";
 import {IRouter} from "./Routing/IRouter";
 import MessagingService from "./Services/Discord/MessagingService";
+import {existsSync} from 'fs';
 
 export abstract class AbstractServiceContainer {
     static db: IDbAdapter;
@@ -17,6 +18,11 @@ export abstract class AbstractServiceContainer {
 
     public static init()
     {
+        if (!existsSync('.env')) {
+            console.error("Error during startup: no .env file exists");
+            process.exit(1);
+        }
+
         console.log('Initialization...');
         dotenvInit();
 
