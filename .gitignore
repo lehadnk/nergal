@@ -6,3 +6,4 @@ dev-db.db3
 prod-db.db3
 .env
 .env.test
+.DS_Store
