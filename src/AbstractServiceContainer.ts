@@ -7,6 +7,8 @@ import {config as dotenvInit} from "dotenv";
 import {IRouter} from "./Routing/IRouter";
 import MessagingService from "./Services/Discord/MessagingService";
 import {existsSync} from 'fs';
+import {IChatCommandsLoader} from "./ChatCommands/IChatCommandsLoader";
+import {ChatCommandsService} from "./Services/ChatCommands/ChatCommandsService";
 
 export abstract class AbstractServiceContainer {
     static db: IDbAdapter;
@@ -15,6 +17,7 @@ export abstract class AbstractServiceContainer {
     static messagingService: MessagingService;
 
     protected static router: IRouter;
+    protected static chatCommandsLoader: IChatCommandsLoader;
 
     public static init()
     {
@@ -35,24 +38,28 @@ export abstract class AbstractServiceContainer {
         let adminIds = JSON.parse(process.env.ADMIN_IDS);
         adminIds.forEach(e => admins.set(e, null));
 
+        let commands = this.chatCommandsLoader.load();
+        let chatCommandsService = new ChatCommandsService(commands);
+
         this.discordService = new DiscordService(
             this.discordClient,
             this.router,
             process.env.DISCORD_BOT_TOKEN,
-            admins
+            admins,
+            chatCommandsService
         );
 
         this.messagingService = new MessagingService(this.discordClient);
+
     }
 
     public static async start()
     {
-        let result = await this.discordService.start();
-        if (result === false) {
-            throw "Unable to start the application";
-        } else {
+        await this.discordService.start().catch(reject => {
+            throw "Unable to start the application: " + reject;
+        }).then(() => {
             console.log('The application started!');
-        }
+        })
     }
 
     public static updateRouter()

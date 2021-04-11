@@ -22,7 +22,8 @@ if (fs.existsSync('./test')) {
 }
 
 fs.mkdirSync('./src');
-fs.mkdirSync('./src/Commands');
+fs.mkdirSync('./src/ChatCommands');
+fs.mkdirSync('./src/ConsoleCommands');
 fs.mkdirSync('./src/Controllers');
 fs.mkdirSync('./test');
 fs.copyFileSync('node_modules/nergal/template/run.ts', './run.ts');
@@ -32,8 +33,11 @@ fs.copyFileSync('node_modules/nergal/template/test/startup.ts', './test/startup.
 fs.copyFileSync('node_modules/nergal/template/src/AppServiceContainer.ts', './src/AppServiceContainer.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Router.ts', './src/Router.ts');
 fs.copyFileSync('node_modules/nergal/template/src/Controllers/DirectMessageController.ts', './src/Controllers/DirectMessageController.ts');
-fs.copyFileSync('node_modules/nergal/template/src/Commands/index.ts', './src/Commands/index.ts');
-fs.copyFileSync('node_modules/nergal/template/src/Commands/AppCommandsLoader.ts', './src/Commands/AppCommandsLoader.ts');
-fs.copyFileSync('node_modules/nergal/template/src/Commands/ListGuilds.ts', './src/Commands/ListGuilds.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ConsoleCommands/index.ts', './src/ConsoleCommands/index.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ConsoleCommands/AppCommandsLoader.ts', './src/ConsoleCommands/AppCommandsLoader.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ConsoleCommands/ListGuilds.ts', './src/ConsoleCommands/ListGuilds.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ChatCommands/index.ts', './src/ChatCommands/index.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ChatCommands/AppChatCommandsLoader.ts', './src/ChatCommands/AppChatCommandsLoader.ts');
+fs.copyFileSync('node_modules/nergal/template/src/ChatCommands/HelloCommand.ts', './src/ChatCommands/HelloCommand.ts');
 
 console.log('New project init success!');

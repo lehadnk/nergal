@@ -1,3 +1,5 @@
+import {Message} from "discord.js";
+
 export class DiscordMessage {
     public readonly authorId: string;
     public readonly authorTag: number;
@@ -11,6 +13,7 @@ export class DiscordMessage {
     public readonly isAdmin: boolean;
     public readonly isPrivate: boolean;
     public readonly authorAvatarUrl: string;
+    public readonly object: Message;
 
     constructor(
         authorId: string,
@@ -25,6 +28,7 @@ export class DiscordMessage {
         isAdmin: boolean,
         isPrivate: boolean,
         authorAvatarUrl: string,
+        object: Message
     ) {
         this.authorId = authorId;
         this.authorTag = authorTag;
@@ -38,5 +42,6 @@ export class DiscordMessage {
         this.isAdmin = isAdmin;
         this.isPrivate = isPrivate;
         this.authorAvatarUrl = authorAvatarUrl;
+        this.object = object;
     }
 }

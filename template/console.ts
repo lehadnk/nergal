@@ -1,6 +1,6 @@
 import {CommandService} from "nergal";
 import AppServiceContainer from "./src/AppServiceContainer";
-import AppCommandsLoader from "./src/Commands/AppCommandsLoader";
+import AppCommandsLoader from "./src/ConsoleCommands/AppCommandsLoader";
 
 AppServiceContainer.init();
 AppServiceContainer.start().then(() => {

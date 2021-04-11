@@ -1,8 +1,7 @@
-import {ICommandsLoader} from "../../Commands/ICommandsLoader";
-import {ICommand} from "../../Commands/ICommand";
+import {ICommandsLoader} from "../../ConsoleCommands/ICommandsLoader";
+import {ICommand} from "../../ConsoleCommands/ICommand";
 
 export class CommandService {
-
     private commands: Map<string, ICommand>;
 
     constructor(loader: ICommandsLoader) {

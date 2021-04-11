@@ -1,5 +1,5 @@
-import {ICommand} from "../../../src/Commands/ICommand";
-import {AbstractCommand} from "../../../src/Commands/AbstractCommand";
+import {ICommand} from "../../../src/ConsoleCommands/ICommand";
+import {AbstractCommand} from "../../../src/ConsoleCommands/AbstractCommand";
 import TestServiceContainer from "../TestServiceContainer";
 
 export default class ListGuilds extends AbstractCommand implements ICommand {

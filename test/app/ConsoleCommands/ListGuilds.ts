@@ -1,5 +1,5 @@
-import {ICommand} from "../../../src/Commands/ICommand";
-import {AbstractCommand} from "../../../src/Commands/AbstractCommand";
+import {ICommand} from "../../../src/ConsoleCommands/ICommand";
+import {AbstractCommand} from "../../../src/ConsoleCommands/AbstractCommand";
 
 export default class ListGuilds extends AbstractCommand implements ICommand {
     name: string = 'list-guilds';

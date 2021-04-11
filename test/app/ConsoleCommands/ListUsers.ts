@@ -1,5 +1,5 @@
-import {ICommand} from "../../../src/Commands/ICommand";
-import {AbstractCommand} from "../../../src/Commands/AbstractCommand";
+import {ICommand} from "../../../src/ConsoleCommands/ICommand";
+import {AbstractCommand} from "../../../src/ConsoleCommands/AbstractCommand";
 import {UsersDAO} from "../../../src/DAO/UsersDAO";
 import {User} from "../../../src/Models/User";
 

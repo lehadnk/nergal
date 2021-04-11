@@ -1,6 +1,6 @@
 import {CommandService} from "./src";
 import TestServiceContainer from "./test/app/TestServiceContainer";
-import TestCommandsLoader from "./test/app/Commands/TestCommandsLoader";
+import TestCommandsLoader from "./test/app/ConsoleCommands/TestCommandsLoader";
 
 TestServiceContainer.init();
 TestServiceContainer.start().then(() => {

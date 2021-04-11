@@ -1,7 +1,7 @@
 import * as commands from './index';
-import {ICommand} from '../../../src/Commands/ICommand';
+import {ICommand} from '../../../src/ConsoleCommands/ICommand';
 import TestServiceContainer from "../TestServiceContainer";
-import {ICommandsLoader} from "../../../src/Commands/ICommandsLoader";
+import {ICommandsLoader} from "../../../src/ConsoleCommands/ICommandsLoader";
 
 export default class TestCommandsLoader implements ICommandsLoader
 {

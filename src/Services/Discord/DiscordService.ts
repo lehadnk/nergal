@@ -5,6 +5,8 @@ import {IRouter} from "../../Routing/IRouter";
 import {EmojiReference} from "../../DTO/EmojiReference";
 import {EmojiContainer} from "./EmojiContainer";
 import {DiscordControllerResponse} from "../..";
+import {IChatCommand} from "../../ChatCommands/IChatCommand";
+import {ChatCommandsService} from "../ChatCommands/ChatCommandsService";
 
 export class DiscordService {
     private readonly discordClient;
@@ -12,12 +14,15 @@ export class DiscordService {
     private readonly adminIds: Map<string, null>;
     private router: IRouter;
     private emojis: EmojiContainer = new EmojiContainer();
+    private readonly commands: Map<string, IChatCommand>;
+    private readonly commandService: ChatCommandsService;
 
-    constructor(discordClient: Client, router: IRouter, token: string, adminIds: Map<string, null>) {
+    constructor(discordClient: Client, router: IRouter, token: string, adminIds: Map<string, null>, chatCommandsService: ChatCommandsService) {
         this.discordClient = discordClient;
         this.router = router;
         this.token = token;
         this.adminIds = adminIds;
+        this.commandService = chatCommandsService;
 
         this.setupHandlers();
     }
@@ -53,39 +58,48 @@ export class DiscordService {
                 imageUrls,
                 this.adminIds.has(msg.author.id),
                 msg.channel.type === 'dm',
-                msg.author.displayAvatarURL()
+                msg.author.displayAvatarURL(),
+                msg
             );
 
-            this.router
-                .route(parsedMessage)
-                .then(result => {
-                    if (result === null) {
-                        return;
-                    }
-
-                    if (result.removeOriginalMessage) {
-                        msg.delete(1).catch(reason => {
-                            console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
-                        });
-                    }
-
-                    if (result.responseMessage) {
-                        result.messageDelay ? setTimeout(() => this.sendResponse(msg, result), result.messageDelay) : this.sendResponse(msg, result);
-                    }
-                });
+            let command = this.commandService.getChatCommand(parsedMessage);
+            if (command) {
+                this.commandService.handleChatCommand(command, parsedMessage).then(result => this.handleResponse(result, msg))
+            } else {
+                this.router
+                    .route(parsedMessage)
+                    .then(result => this.handleResponse(result, msg));
+            }
         });
     }
 
-    async start(): Promise<boolean>
+    async handleResponse(result: DiscordControllerResponse, msg)
+    {
+        if (result === null || result === undefined) {
+            return;
+        }
+
+        if (result.removeOriginalMessage) {
+            msg.delete(1).catch(reason => {
+                console.error("Unable to delete message in server " + msg.guild.name + ", reason: " + reason);
+            });
+        }
+
+        if (result.responseMessage) {
+            result.messageDelay ? setTimeout(() => this.sendResponse(msg, result), result.messageDelay) : this.sendResponse(msg, result);
+        }
+    }
+
+    async start(): Promise<void>
     {
         if (this.router == null) {
             throw "router cannot be null at app start";
         }
 
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             this.discordClient.on("ready", async () => {
                 await this.loadEmojiList();
-                resolve(true);
+                resolve();
             });
 
             this.discordClient
@@ -94,8 +108,20 @@ export class DiscordService {
 
                 })
                 .catch(reason => {
-                    console.error('Error while bringing the bot up: ' + reason);
-                    reject(reason);
+                    switch (reason.code) {
+                        case 500:
+                            console.error('Error while bringing the bot up: Network is offline, or discord API is down');
+                            reject('Network is offline, or discord API is down')
+                            return
+                        case 'TOKEN_INVALID':
+                            console.error('Error while bringing the bot up: Invalid DISCORD_BOT_TOKEN');
+                            reject('Invalid DISCORD_BOT_TOKEN')
+                            return
+                        default:
+                            console.error('Error while bringing the bot up: ' + reason);
+                            reject(reason);
+                            return
+                    }
                 })
         });
     }
