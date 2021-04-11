@@ -1,1 +1,1 @@
-export {default as ListGuilds} from './ListGuilds';
+export {default as HelloCommand} from './HelloCommand';
