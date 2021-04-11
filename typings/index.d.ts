@@ -1,7 +1,10 @@
-export { AbstractCommand } from './Commands/AbstractCommand';
-export { ICommand } from './Commands/ICommand';
-export { ICommandsLoader } from './Commands/ICommandsLoader';
-export { InitCommand } from './Commands/InitCommand';
+export { AbstractChatCommand } from './ChatCommands/AbstractChatCommand';
+export { IChatCommand } from './ChatCommands/IChatCommand';
+export { IChatCommandsLoader } from './ChatCommands/IChatCommandsLoader';
+export { AbstractCommand } from './ConsoleCommands/AbstractCommand';
+export { ICommand } from './ConsoleCommands/ICommand';
+export { ICommandsLoader } from './ConsoleCommands/ICommandsLoader';
+export { InitCommand } from './ConsoleCommands/InitCommand';
 export { AbstractDAO } from './DAO/AbstractDAO';
 export { UsersDAO } from './DAO/UsersDAO';
 export { DiscordControllerResponse } from './DTO/DiscordControllerResponse';

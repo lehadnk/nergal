@@ -8,6 +8,7 @@ const DiscordService_1 = require("./Services/Discord/DiscordService");
 const dotenv_1 = require("dotenv");
 const MessagingService_1 = require("./Services/Discord/MessagingService");
 const fs_1 = require("fs");
+const ChatCommandsService_1 = require("./Services/ChatCommands/ChatCommandsService");
 class AbstractServiceContainer {
     static init() {
         if (!fs_1.existsSync('.env')) {
@@ -23,17 +24,17 @@ class AbstractServiceContainer {
         let admins = new Map();
         let adminIds = JSON.parse(process.env.ADMIN_IDS);
         adminIds.forEach(e => admins.set(e, null));
-        this.discordService = new DiscordService_1.DiscordService(this.discordClient, this.router, process.env.DISCORD_BOT_TOKEN, admins);
+        let commands = this.chatCommandsLoader.load();
+        let chatCommandsService = new ChatCommandsService_1.ChatCommandsService(commands);
+        this.discordService = new DiscordService_1.DiscordService(this.discordClient, this.router, process.env.DISCORD_BOT_TOKEN, admins, chatCommandsService);
         this.messagingService = new MessagingService_1.default(this.discordClient);
     }
     static async start() {
-        let result = await this.discordService.start();
-        if (result === false) {
-            throw "Unable to start the application";
-        }
-        else {
+        await this.discordService.start().catch(reject => {
+            throw "Unable to start the application: " + reject;
+        }).then(() => {
             console.log('The application started!');
-        }
+        });
     }
     static updateRouter() {
         this.discordService.setRouter(this.router);

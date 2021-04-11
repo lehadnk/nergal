@@ -1,8 +1,10 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-var AbstractCommand_1 = require("./Commands/AbstractCommand");
+var AbstractChatCommand_1 = require("./ChatCommands/AbstractChatCommand");
+Object.defineProperty(exports, "AbstractChatCommand", { enumerable: true, get: function () { return AbstractChatCommand_1.AbstractChatCommand; } });
+var AbstractCommand_1 = require("./ConsoleCommands/AbstractCommand");
 Object.defineProperty(exports, "AbstractCommand", { enumerable: true, get: function () { return AbstractCommand_1.AbstractCommand; } });
-var InitCommand_1 = require("./Commands/InitCommand");
+var InitCommand_1 = require("./ConsoleCommands/InitCommand");
 Object.defineProperty(exports, "InitCommand", { enumerable: true, get: function () { return InitCommand_1.InitCommand; } });
 var AbstractDAO_1 = require("./DAO/AbstractDAO");
 Object.defineProperty(exports, "AbstractDAO", { enumerable: true, get: function () { return AbstractDAO_1.AbstractDAO; } });

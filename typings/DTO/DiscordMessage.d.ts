@@ -1,3 +1,4 @@
+import { Message } from "discord.js";
 export declare class DiscordMessage {
     readonly authorId: string;
     readonly authorTag: number;
@@ -11,5 +12,6 @@ export declare class DiscordMessage {
     readonly isAdmin: boolean;
     readonly isPrivate: boolean;
     readonly authorAvatarUrl: string;
-    constructor(authorId: string, authorTag: number, authorName: string, serverId: string, serverName: string, channelId: string, channelName: string, message: string, embedImageUrl: string[], isAdmin: boolean, isPrivate: boolean, authorAvatarUrl: string);
+    readonly object: Message;
+    constructor(authorId: string, authorTag: number, authorName: string, serverId: string, serverName: string, channelId: string, channelName: string, message: string, embedImageUrl: string[], isAdmin: boolean, isPrivate: boolean, authorAvatarUrl: string, object: Message);
 }
