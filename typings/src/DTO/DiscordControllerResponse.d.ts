@@ -1,5 +1,6 @@
 import EmojiReference from "./EmojiReference";
 import ReactionCollector from "./ReactionCollector";
+
 export declare class DiscordControllerResponse {
     readonly responseMessage: string;
     readonly removeOriginalMessage: boolean;

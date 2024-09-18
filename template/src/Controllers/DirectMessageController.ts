@@ -1,5 +1,4 @@
-import {DiscordMessage} from "nergal";
-import {DiscordControllerResponse} from "nergal";
+import {DiscordControllerResponse, DiscordMessage} from "nergal";
 
 export default class DirectMessageController {
     async dispatch(msg: DiscordMessage): Promise<DiscordControllerResponse> {

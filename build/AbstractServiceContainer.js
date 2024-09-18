@@ -11,19 +11,25 @@ const fs_1 = require("fs");
 const ChatCommandsService_1 = require("./Services/ChatCommands/ChatCommandsService");
 class AbstractServiceContainer {
     static init() {
-        if (!fs_1.existsSync('.env')) {
+        if (!(0, fs_1.existsSync)('.env')) {
             console.error("Error during startup: no .env file exists");
             process.exit(1);
         }
         console.log('Initialization...');
-        dotenv_1.config();
-        this.discordClient = new discord_js_1.Client();
+        (0, dotenv_1.config)();
+        this.discordClient = new discord_js_1.Client({
+            intents: [discord_js_1.GatewayIntentBits.MessageContent, discord_js_1.GatewayIntentBits.Guilds]
+        });
         let databaseFile = './' + process.env.APP_ENV + '-db.db3';
         let db = new sqlite3_1.Database(databaseFile);
         this.db = new SqliteDbAdapter_1.SqliteDbAdapter(db);
         let admins = new Map();
-        let adminIds = JSON.parse(process.env.ADMIN_IDS);
-        adminIds.forEach(e => admins.set(e, null));
+        try {
+            let adminIds = JSON.parse(process.env.ADMIN_IDS);
+            adminIds.forEach(e => admins.set(e, null));
+        }
+        catch (_a) {
+        }
         let commands = this.chatCommandsLoader.load();
         let chatCommandsService = new ChatCommandsService_1.ChatCommandsService(commands);
         this.discordService = new DiscordService_1.DiscordService(this.discordClient, this.router, process.env.DISCORD_BOT_TOKEN, admins, chatCommandsService);

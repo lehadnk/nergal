@@ -1,5 +1,6 @@
-import { Client } from 'discord.js';
-import { IRouter } from "../../Routing/IRouter";
+import {Client} from 'discord.js';
+import {IRouter} from "../../Routing/IRouter";
+
 export declare class DiscordService {
     private readonly discordClient;
     private readonly token;

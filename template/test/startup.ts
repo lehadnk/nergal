@@ -1,4 +1,4 @@
-import {unlinkSync, existsSync} from 'fs';
+import {existsSync, unlinkSync} from 'fs';
 import {exec} from 'child_process';
 
 const testDbFile = 'test-db.db3';

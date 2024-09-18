@@ -6,5 +6,5 @@ var DatabaseErrorCode;
     DatabaseErrorCode[DatabaseErrorCode["ConstraintViolation"] = 0] = "ConstraintViolation";
     DatabaseErrorCode[DatabaseErrorCode["NoResult"] = 1] = "NoResult";
     DatabaseErrorCode[DatabaseErrorCode["Other"] = 2] = "Other";
-})(DatabaseErrorCode = exports.DatabaseErrorCode || (exports.DatabaseErrorCode = {}));
+})(DatabaseErrorCode || (exports.DatabaseErrorCode = DatabaseErrorCode = {}));
 //# sourceMappingURL=DatabaseErrorCode.js.map

@@ -1,6 +1,4 @@
-import {DiscordMessage} from "nergal";
-import {DiscordControllerResponse} from "nergal";
-import {IRouter} from 'nergal';
+import {DiscordControllerResponse, DiscordMessage, IRouter} from "nergal";
 import DirectMessageController from "./Controllers/DirectMessageController";
 
 export default class Router implements IRouter {

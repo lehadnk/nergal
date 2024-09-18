@@ -5,6 +5,6 @@ export declare class SqliteDbAdapter implements IDbAdapter {
     constructor(dbConnection: Database);
     value(sql: string, placeholders?: object): Promise<string>;
     one(sql: string, placeholders?: object): Promise<any>;
-    all(sql: string, placeholders?: object): Promise<any[]>;
+    all(sql: string, placeholders?: object): Promise<unknown[]>;
     run(sql: string, placeholders?: object): Promise<void>;
 }

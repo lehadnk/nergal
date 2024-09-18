@@ -1,5 +1,4 @@
-import {IChatCommandsLoader} from 'nergal';
-import {IChatCommand} from 'nergal';
+import {IChatCommand, IChatCommandsLoader} from 'nergal';
 import * as commands from './index';
 import AppServiceContainer from "../AppServiceContainer";
 

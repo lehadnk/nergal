@@ -1,5 +1,6 @@
-import { Database } from "sqlite3";
-import { IDbAdapter } from "./IDbAdapter";
+import {Database} from "sqlite3";
+import {IDbAdapter} from "./IDbAdapter";
+
 export declare class SqliteDbAdapter implements IDbAdapter {
     private db;
     constructor(dbConnection: Database);

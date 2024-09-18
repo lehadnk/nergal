@@ -1,6 +1,6 @@
 import {IDbAdapter} from "./Services/Db/IDbAdapter";
 import {Database} from "sqlite3";
-import {Client} from 'discord.js';
+import {Client, GatewayIntentBits} from 'discord.js';
 import {SqliteDbAdapter} from "./Services/Db/SqliteDbAdapter";
 import {DiscordService} from "./Services/Discord/DiscordService";
 import {config as dotenvInit} from "dotenv";
@@ -29,14 +29,20 @@ export abstract class AbstractServiceContainer {
         console.log('Initialization...');
         dotenvInit();
 
-        this.discordClient = new Client();
+        this.discordClient = new Client({
+            intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds]
+        });
         let databaseFile = './' + process.env.APP_ENV + '-db.db3';
         let db = new Database(databaseFile);
         this.db = new SqliteDbAdapter(db);
 
         let admins = new Map<string, null>();
-        let adminIds = JSON.parse(process.env.ADMIN_IDS);
-        adminIds.forEach(e => admins.set(e, null));
+        try {
+            let adminIds = JSON.parse(process.env.ADMIN_IDS);
+            adminIds.forEach(e => admins.set(e, null));
+        } catch {
+
+        }
 
         let commands = this.chatCommandsLoader.load();
         let chatCommandsService = new ChatCommandsService(commands);

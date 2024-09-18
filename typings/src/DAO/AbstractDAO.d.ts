@@ -1,5 +1,6 @@
-import { IDbAdapter } from "../Services/Db/IDbAdapter";
+import {IDbAdapter} from "../Services/Db/IDbAdapter";
 import AbstractModel from "../Models/AbstractModel";
+
 export default abstract class AbstractDAO<T extends AbstractModel> {
     protected db: IDbAdapter;
     abstract table: string;

@@ -1,7 +1,4 @@
-import {DiscordMessage} from "nergal";
-import {DiscordControllerResponse} from "nergal";
-import {AbstractChatCommand} from "nergal";
-import {IChatCommand} from "nergal";
+import {AbstractChatCommand, DiscordControllerResponse, DiscordMessage, IChatCommand} from "nergal";
 
 export default class HelloCommand extends AbstractChatCommand implements IChatCommand {
     command: string = '!hello';

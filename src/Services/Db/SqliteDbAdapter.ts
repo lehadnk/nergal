@@ -44,8 +44,8 @@ export class SqliteDbAdapter implements IDbAdapter {
         });
     }
 
-    async all(sql: string, placeholders?: object): Promise<any[]> {
-        return new Promise<object[]>((resolve, reject) => {
+    async all(sql: string, placeholders?: object): Promise<unknown[]> {
+        return new Promise<unknown[]>((resolve, reject) => {
             this.db.all(sql, placeholders, (err, rows) => {
                 if (err !== null) {
                     reject(err);
